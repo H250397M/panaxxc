@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery — Innovate Club | Event Photos & Campus Moments</title>
+  <meta name="description" content="Browse through photos from Innovate Club workshops, hackathons, guest keynote sessions, and campus project showcases.">
+  <link rel="icon" type="image/svg+xml" href="images/logo/favicon.svg">
+  
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Site Header & Shared Navigation -->
+  <header class="site-header" id="header">
+    <div class="container header-container">
+      <a href="index.html" class="brand-link" id="brandLogoLink">
+        <img src="images/logo/logo.svg" alt="Innovate Club Logo" class="brand-logo">
+      </a>
+
+      <nav class="nav-menu" id="navMenu" aria-label="Main Navigation">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link" id="navHome">Home</a></li>
+          <li><a href="about.html" class="nav-link" id="navAbout">About Us</a></li>
+          <li><a href="activities.html" class="nav-link" id="navActivities">Activities</a></li>
+          <li><a href="gallery.html" class="nav-link active" id="navGallery">Gallery</a></li>
+          <li><a href="join.html" class="nav-cta-btn" id="navJoin">Join / Contact <i class="fa-solid fa-arrow-right"></i></a></li>
+        </ul>
+      </nav>
+
+      <button class="mobile-toggle" id="mobileNavToggle" aria-label="Toggle Navigation Menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="main-content">
+
+    <!-- Page Header with Green Underline Accent -->
+    <section class="page-header">
+      <div class="container">
+        <h1 class="page-title">Gallery</h1>
+        <p class="page-subtitle">
+          Moments captured from our campus sprints, hackathons, lab build nights, and project exhibitions. 
+          Click any photo to open the interactive lightbox.
+        </p>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section" style="padding-top: 10px;">
+      <div class="container">
+        
+        <!-- Category Filter Buttons (Week 3 Interactive Feature) -->
+        <div class="gallery-filters" id="galleryFilters">
+          <button class="tab-btn gallery-filter-btn active" data-filter="all">All Photos</button>
+          <button class="tab-btn gallery-filter-btn" data-filter="workshops">Workshops</button>
+          <button class="tab-btn gallery-filter-btn" data-filter="hackathons">Hackathons</button>
+          <button class="tab-btn gallery-filter-btn" data-filter="campus">Campus Life</button>
+          <button class="tab-btn gallery-filter-btn" data-filter="keynotes">Keynotes</button>
+        </div>
+
+        <!-- 2 Rows x 4 Columns Photo Grid (Mockup Specification) -->
+        <div class="gallery-grid" id="clubPhotoGrid">
+          
+          <!-- Photo 1: Hackathon 2025 -->
+          <div class="gallery-card" data-category="hackathons" data-title="Campus Hackathon 2024 Stage" data-caption="Student prototype presentation for IoT Eco-Monitor at the annual campus innovation challenge.">
+            <img src="images/gallery/hackathon-2025.jpg" alt="Student presentation at Hackathon 2024" loading="lazy">
+            <div class="gallery-zoom-icon"><i class="fa-solid fa-expand"></i></div>
+            <div class="gallery-overlay">
+              <h3 class="gallery-title">Hackathon 2024 Demo Stage</h3>
+              <p class="gallery-caption">Sustainable IoT Sensor Presentation</p>
+            </div>
+          </div>
+
+          <!-- Photo 2: Web Workshop -->
+          <div class="gallery-card" data-category="workshops" data-title="Web Programming Bootcamp" data-caption="Hands-on web engineering lab session exploring modern HTML5, responsive CSS Grid, and dynamic DOM scripting.">
+            <img src="images/gallery/web-workshop.jpg" alt="Web Programming Workshop in Tech Lab" loading="lazy">
+            <div class="gallery-zoom-icon"><i class="fa-solid fa-expand"></i></div>
+            <div class="gallery-overlay">
+              <h3 class="gallery-title">Web Development Workshop</h3>
+              <p class="gallery-caption">Lab 301 Coding Sprint</p>
+            </div>
+          </div>
+
+          <!-- Photo 3: Campus Social -->
+          <div class="gallery-card" data-category="campus" data-title="Freshers Welcome & Certificate Day" data-caption="Club members and workshop graduates celebrating on the campus quad after completing their foundational tracks.">
+            <img src="images/gallery/campus-networking.jpg" alt="Club members celebrating on campus lawn" loading="lazy">
+            <div class="gallery-zoom-icon"><i class="fa-solid fa-expand"></i></div>
+            <div class="gallery-overlay">
+              <h3 class="gallery-title">Campus Social & Awards</h3>
+              <p class="gallery-caption">Community networking & certification</p>
+            </div>
+          </div>
+
+          <!-- Photo 4: Project Showcase -->
+          <div class="gallery-card" data-category="hackathons" data-title="Urban Navigator AI Demo Booth" data-caption="Students exhibiting their intelligent route optimization application to university faculty and industry visitors.">
+            <img src="images/gallery/project-showcase.jpg" alt="Students presenting project at exhibition" loading="lazy">
+            <div class="gallery-zoom-icon"><i class="fa-solid fa-expand"></i></div>
+            <div class="gallery-overlay">
+              <h3 class="gallery-title">Innovation Expo Booth</h3>
+              <p class="gallery-caption">AI Urban Navigation Prototype</p>
+            </div>
+          </div>
+
+          <!-- Photo 5: Industry Keynote -->
+          <div class="gallery-card" data-category="keynotes" data-title="Future Tech Trends Keynote" data-caption="Distinguished industry guest lecture delivered in the engineering auditorium on AI and cloud systems.">
+            <img src="images/gallery/guest-keynote.jpg" alt="Tech industry keynote speaker on auditorium stage" loading="lazy">
+            <div class="gallery-zoom-icon"><i class="fa-solid fa-expand"></i></div>
+            <div class="gallery-overlay">
+              <h3 class="gallery-title">Future Tech Trends 2030</h3>
+              <p class="gallery-caption">Auditorium Keynote & Q&A</p>
+            </div>
+          </div>
+
+          <!-- Photo 6: Code Sprint -->
+          <div class="gallery-card" data-category="workshops" data-title="Collaborative Code Sprint" data-caption="Peer-to-peer programming marathon where students pair up to tackle algorithmic challenges and open issues.">
+            <img src="images/gallery/code-sprint.jpg" alt="Students coding collaboratively with laptops" loading="lazy">
+            <div class="gallery-zoom-icon"><i class="fa-solid fa-expand"></i></div>
+            <div class="gallery-overlay">
+              <h3 class="gallery-title">Pair Programming Lab</h3>
+              <p class="gallery-caption">Evening coding sprints & code reviews</p>
+            </div>
+          </div>
+
+          <!-- Photo 7: Robotics Lab -->
+          <div class="gallery-card" data-category="workshops" data-title="Smart Robotics & Embedded Tech" data-caption="Students assembling sensors, microcontrollers, and wireless modules for campus robotics prototypes.">
+            <img src="images/gallery/robotics-lab.jpg" alt="Robotics and electronics prototyping lab" loading="lazy">
+            <div class="gallery-zoom-icon"><i class="fa-solid fa-expand"></i></div>
+            <div class="gallery-overlay">
+              <h3 class="gallery-title">Hardware & IoT Session</h3>
+              <p class="gallery-caption">Hands-on micro-controller labs</p>
+            </div>
+          </div>
+
+          <!-- Photo 8: Annual Gala -->
+          <div class="gallery-card" data-category="campus" data-title="Annual Club Gala & Team Celebration" data-caption="Reflecting on a year of accomplishments, hackathon victories, and welcoming our newly elected executive committee.">
+            <img src="images/gallery/annual-gala.jpg" alt="Club celebration and social gathering" loading="lazy">
+            <div class="gallery-zoom-icon"><i class="fa-solid fa-expand"></i></div>
+            <div class="gallery-overlay">
+              <h3 class="gallery-title">Annual Celebration</h3>
+              <p class="gallery-caption">Honoring student contributions</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div style="text-align: center;">
+          <p style="font-size: 0.95rem; color: var(--color-text-muted); margin-bottom: 18px;">
+            Have event photos or project screenshots to share with the club?
+          </p>
+          <a href="join.html" class="btn btn-secondary btn-sm">
+            <i class="fa-solid fa-cloud-arrow-up"></i> Submit Photos to Media Team
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Interactive Lightbox Modal (Week 3 JS Requirement) -->
+  <div class="lightbox-modal" id="galleryLightbox" role="dialog" aria-modal="true" aria-label="Image Preview Modal">
+    <div class="lightbox-content-box">
+      <button class="lightbox-close-btn" id="lightboxClose" aria-label="Close Lightbox">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <button class="lightbox-nav-btn lightbox-prev" id="lightboxPrev" aria-label="Previous Image">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+
+      <button class="lightbox-nav-btn lightbox-next" id="lightboxNext" aria-label="Next Image">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+
+      <div class="lightbox-image-wrap">
+        <img src="" alt="Enlarged gallery photo" id="lightboxImg">
+      </div>
+
+      <div class="lightbox-footer">
+        <div class="lightbox-caption-text">
+          <strong id="lightboxTitle">Photo Title</strong>
+          <span id="lightboxCaption">Photo description will be rendered here.</span>
+        </div>
+        <div>
+          <span class="role-tag" id="lightboxCategory">EVENT</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Universal Footer -->
+  <footer class="site-footer" id="footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div class="footer-brand">
+          <h4>Innovate Club.</h4>
+          <p>
+            University student society dedicated to technological innovation, hands-on programming, 
+            creative collaboration, and leadership development.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h5>Quick Links</h5>
+          <ul class="footer-links">
+            <li><a href="index.html"><i class="fa-solid fa-angle-right"></i> Home</a></li>
+            <li><a href="about.html"><i class="fa-solid fa-angle-right"></i> About Us</a></li>
+            <li><a href="activities.html"><i class="fa-solid fa-angle-right"></i> Activities & Events</a></li>
+            <li><a href="gallery.html"><i class="fa-solid fa-angle-right"></i> Photo Gallery</a></li>
+            <li><a href="join.html"><i class="fa-solid fa-angle-right"></i> Join / Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Meetings & Venue</h5>
+          <ul class="footer-links" style="font-size: 0.88rem; color: rgba(255,255,255,0.85); gap: 12px;">
+            <li><i class="fa-regular fa-clock" style="color:var(--color-primary-light);"></i> Wednesdays 4:00 PM – 6:00 PM</li>
+            <li><i class="fa-solid fa-location-dot" style="color:var(--color-primary-light);"></i> Tech Hub, Room 301</li>
+            <li><i class="fa-solid fa-graduation-cap" style="color:var(--color-primary-light);"></i> Open to All Departments</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Connect With Us</h5>
+          <p style="font-size: 0.88rem; color: rgba(255,255,255,0.8); margin-bottom: 16px;">
+            Tag us in your hackathon and workshop photos using #InnovateClub.
+          </p>
+          <div class="social-icons-row">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-circle-btn" aria-label="Facebook">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-circle-btn" aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-circle-btn" aria-label="Twitter">
+              <i class="fa-brands fa-x-twitter"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-circle-btn" aria-label="LinkedIn">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Innovate Club. All rights reserved.</p>
+        <p class="footer-course-tag">ICS 2102 — Web Development Semester Mini Project</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

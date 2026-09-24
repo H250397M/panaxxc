@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us — Innovate Club | Student Tech & Innovation Society</title>
+  <meta name="description" content="Learn about Innovate Club's mission, vision, committee leaders, and student-centric initiatives at the university.">
+  <link rel="icon" type="image/svg+xml" href="images/logo/favicon.svg">
+  
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Site Header & Shared Navigation -->
+  <header class="site-header" id="header">
+    <div class="container header-container">
+      <a href="index.html" class="brand-link" id="brandLogoLink">
+        <img src="images/logo/logo.svg" alt="Innovate Club Logo" class="brand-logo">
+      </a>
+
+      <nav class="nav-menu" id="navMenu" aria-label="Main Navigation">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link" id="navHome">Home</a></li>
+          <li><a href="about.html" class="nav-link active" id="navAbout">About Us</a></li>
+          <li><a href="activities.html" class="nav-link" id="navActivities">Activities</a></li>
+          <li><a href="gallery.html" class="nav-link" id="navGallery">Gallery</a></li>
+          <li><a href="join.html" class="nav-cta-btn" id="navJoin">Join / Contact <i class="fa-solid fa-arrow-right"></i></a></li>
+        </ul>
+      </nav>
+
+      <button class="mobile-toggle" id="mobileNavToggle" aria-label="Toggle Navigation Menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="main-content">
+
+    <!-- Page Header with Green Underline Accent -->
+    <section class="page-header">
+      <div class="container">
+        <h1 class="page-title">About Us</h1>
+        <p class="page-subtitle">
+          Building the university's strongest student community for software craftsmanship, 
+          emerging technologies, and collaborative learning.
+        </p>
+      </div>
+    </section>
+
+    <!-- Intro & Mission / Vision Grid -->
+    <section class="section" style="padding-top: 20px;">
+      <div class="container">
+        
+        <div class="about-hero-grid">
+          
+          <!-- Left: Club Story & Purpose -->
+          <div class="about-intro-text">
+            <h2 style="font-size: 2rem; font-weight: 800; color: var(--color-text-main); margin-bottom: 20px; letter-spacing: -0.02em;">
+              Fostering Tomorrow's Tech Leaders Today
+            </h2>
+            <p>
+              Founded by enthusiastic computer science and engineering undergraduates, <strong>Innovate Club</strong> 
+              was established to bridge the gap between theoretical classroom coursework and rapid real-world industry practices. 
+              We believe students learn best when solving real campus challenges and collaborating across disciplines.
+            </p>
+            <p>
+              From organizing peer-led code jams and interactive web development workshops to hosting university-wide 
+              hackathons and guest seminars with industry veterans, we create an open playground where curiosity thrives.
+            </p>
+            <p>
+              Every student, whether a first-year beginner writing their first HTML tag or a senior engineering student 
+              building machine learning pipelines, is given mentorship, resources, and leadership opportunities.
+            </p>
+
+            <div style="margin-top: 32px; display: flex; gap: 16px; flex-wrap: wrap;">
+              <a href="activities.html" class="btn btn-primary btn-sm"><i class="fa-regular fa-calendar-check"></i> See What We Do</a>
+              <a href="join.html" class="btn btn-secondary btn-sm"><i class="fa-solid fa-user-plus"></i> Join Our Society</a>
+            </div>
+          </div>
+
+          <!-- Right: Mission & Vision Cards (Light Card Background) -->
+          <div class="about-cards-col">
+            
+            <div class="card-callout">
+              <div class="card-callout-icon">
+                <i class="fa-solid fa-bullseye"></i>
+              </div>
+              <h3 class="card-callout-title">Our Mission</h3>
+              <p class="card-callout-desc">
+                To equip university students with practical software engineering skills, collaborative 
+                problem-solving mindsets, and professional networks needed to thrive in modern global technology careers.
+              </p>
+            </div>
+
+            <div class="card-callout">
+              <div class="card-callout-icon" style="background-color: var(--color-primary-dark);">
+                <i class="fa-solid fa-eye"></i>
+              </div>
+              <h3 class="card-callout-title">Our Vision</h3>
+              <p class="card-callout-desc">
+                To be the leading collegiate incubator of student innovation, recognized across national and international 
+                student hackathons for building impactful, ethical, and sustainable technological solutions.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Core Values Grid -->
+        <div class="section-header" style="margin-top: 40px; margin-bottom: 32px;">
+          <h3 class="section-title with-accent">Our Core Values</h3>
+        </div>
+
+        <div class="values-grid">
+          <div class="value-item">
+            <div class="value-icon"><i class="fa-solid fa-lightbulb"></i></div>
+            <h4>Innovation</h4>
+            <p>Embracing novel ideas and encouraging calculated creative experimentation.</p>
+          </div>
+          <div class="value-item">
+            <div class="value-icon"><i class="fa-solid fa-handshake-angle"></i></div>
+            <h4>Inclusivity</h4>
+            <p>Welcoming all academic faculties, genders, and experience levels with open doors.</p>
+          </div>
+          <div class="value-item">
+            <div class="value-icon"><i class="fa-solid fa-code-compare"></i></div>
+            <h4>Craftsmanship</h4>
+            <p>Writing clean, maintainable code and building accessible, reliable applications.</p>
+          </div>
+          <div class="value-item">
+            <div class="value-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+            <h4>Community</h4>
+            <p>Helping one another grow through generous mentorship and shared triumphs.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Committee Section (Cards + HTML Table) -->
+    <section class="section section-alt" id="committeeSection">
+      <div class="container">
+        
+        <div class="section-header">
+          <h2 class="section-title with-accent">Our Committee</h2>
+          <p class="section-desc">
+            Meet the dedicated student leaders orchestrating workshops, coordinating events, and driving our club forward.
+          </p>
+        </div>
+
+        <!-- Committee Member Cards (President, Vice President, Secretary, Treasurer) -->
+        <div class="committee-cards-grid">
+          
+          <!-- President -->
+          <div class="member-card">
+            <div class="member-avatar-box">
+              <img src="images/president.jpg" alt="Amina Kimani - President" loading="lazy">
+              <span class="member-role-badge">Club President</span>
+            </div>
+            <div class="member-info">
+              <h3 class="member-name">Amina Kimani</h3>
+              <p class="member-course">BSc. Computer Science (Year 3)</p>
+              <div class="member-socials">
+                <a href="mailto:amina.president@innovateclub.edu" title="Email Amina"><i class="fa-regular fa-envelope"></i></a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fa-brands fa-github"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Vice President -->
+          <div class="member-card">
+            <div class="member-avatar-box">
+              <img src="images/vice-president.jpg" alt="David Omondi - Vice President" loading="lazy">
+              <span class="member-role-badge">Vice President</span>
+            </div>
+            <div class="member-info">
+              <h3 class="member-name">David Omondi</h3>
+              <p class="member-course">BSc. Software Engineering (Year 3)</p>
+              <div class="member-socials">
+                <a href="mailto:david.vp@innovateclub.edu" title="Email David"><i class="fa-regular fa-envelope"></i></a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fa-brands fa-github"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Secretary -->
+          <div class="member-card">
+            <div class="member-avatar-box">
+              <img src="images/secretary.jpg" alt="Sarah Wangari - Secretary" loading="lazy">
+              <span class="member-role-badge">General Secretary</span>
+            </div>
+            <div class="member-info">
+              <h3 class="member-name">Sarah Wangari</h3>
+              <p class="member-course">BSc. Information Technology (Year 2)</p>
+              <div class="member-socials">
+                <a href="mailto:sarah.secretary@innovateclub.edu" title="Email Sarah"><i class="fa-regular fa-envelope"></i></a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fa-brands fa-github"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Treasurer -->
+          <div class="member-card">
+            <div class="member-avatar-box">
+              <img src="images/treasurer.jpg" alt="Kevin Kipchumba - Treasurer" loading="lazy">
+              <span class="member-role-badge">Treasurer & Sponsorships</span>
+            </div>
+            <div class="member-info">
+              <h3 class="member-name">Kevin Kipchumba</h3>
+              <p class="member-course">BSc. Business Computing (Year 3)</p>
+              <div class="member-socials">
+                <a href="mailto:kevin.treasurer@innovateclub.edu" title="Email Kevin"><i class="fa-regular fa-envelope"></i></a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fa-brands fa-github"></i></a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- HTML Table of Committee Members (Week 2 Syllabus Requirement) -->
+        <div style="margin-top: 56px;">
+          <h3 style="font-size: 1.4rem; font-weight: 700; color: var(--color-text-main); margin-bottom: 8px;">
+            Executive Directory & Office Hours
+          </h3>
+          <p style="font-size: 0.95rem; color: var(--color-text-muted); margin-bottom: 20px;">
+            Reach out to our committee for inquiries on events, sponsorships, project mentoring, or room bookings.
+          </p>
+
+          <div class="table-wrapper">
+            <table class="custom-table" id="committeeDirectoryTable">
+              <thead>
+                <tr>
+                  <th scope="col">Member Name</th>
+                  <th scope="col">Executive Role</th>
+                  <th scope="col">Degree Course</th>
+                  <th scope="col">Year</th>
+                  <th scope="col">Official Email</th>
+                  <th scope="col">Lab Office Hours</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="table-member-cell">
+                      <img src="images/president.jpg" alt="Amina Kimani" class="table-avatar">
+                      <strong>Amina Kimani</strong>
+                    </div>
+                  </td>
+                  <td><span class="role-tag">President</span></td>
+                  <td>Computer Science</td>
+                  <td>Year 3</td>
+                  <td><a href="mailto:amina.president@innovateclub.edu" style="color:var(--color-primary); font-weight:600;">amina.president@innovateclub.edu</a></td>
+                  <td>Mon & Wed 2:00 PM – 4:00 PM</td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="table-member-cell">
+                      <img src="images/vice-president.jpg" alt="David Omondi" class="table-avatar">
+                      <strong>David Omondi</strong>
+                    </div>
+                  </td>
+                  <td><span class="role-tag">Vice President</span></td>
+                  <td>Software Engineering</td>
+                  <td>Year 3</td>
+                  <td><a href="mailto:david.vp@innovateclub.edu" style="color:var(--color-primary); font-weight:600;">david.vp@innovateclub.edu</a></td>
+                  <td>Tue & Thu 10:00 AM – 12:00 PM</td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="table-member-cell">
+                      <img src="images/secretary.jpg" alt="Sarah Wangari" class="table-avatar">
+                      <strong>Sarah Wangari</strong>
+                    </div>
+                  </td>
+                  <td><span class="role-tag">Secretary</span></td>
+                  <td>Information Technology</td>
+                  <td>Year 2</td>
+                  <td><a href="mailto:sarah.secretary@innovateclub.edu" style="color:var(--color-primary); font-weight:600;">sarah.secretary@innovateclub.edu</a></td>
+                  <td>Wed & Fri 3:00 PM – 5:00 PM</td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="table-member-cell">
+                      <img src="images/treasurer.jpg" alt="Kevin Kipchumba" class="table-avatar">
+                      <strong>Kevin Kipchumba</strong>
+                    </div>
+                  </td>
+                  <td><span class="role-tag">Treasurer</span></td>
+                  <td>Business Computing</td>
+                  <td>Year 3</td>
+                  <td><a href="mailto:kevin.treasurer@innovateclub.edu" style="color:var(--color-primary); font-weight:600;">kevin.treasurer@innovateclub.edu</a></td>
+                  <td>Thursdays 1:00 PM – 3:00 PM</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FAQ Accordion (Week 3 JS Interactivity Requirement) -->
+    <section class="section faq-section" id="faqSection">
+      <div class="container">
+        
+        <div class="section-header">
+          <h2 class="section-title with-accent">Frequently Asked Questions</h2>
+          <p class="section-desc">
+            Everything you need to know about joining, meetings, and taking part in club projects.
+          </p>
+        </div>
+
+        <div class="accordion-container" id="faqAccordion">
+          
+          <div class="accordion-item active">
+            <button class="accordion-header">
+              <span>Do I need prior coding experience to join?</span>
+              <i class="fa-solid fa-chevron-down accordion-icon"></i>
+            </button>
+            <div class="accordion-body" style="max-height: 200px;">
+              <p>
+                Not at all! Innovate Club welcomes students from all majors and skill levels. We host beginner-friendly 
+                tracks starting from HTML, CSS, and basic programming fundamentals, paired with senior student mentors 
+                to guide your learning journey.
+              </p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span>Are club memberships free for university students?</span>
+              <i class="fa-solid fa-chevron-down accordion-icon"></i>
+            </button>
+            <div class="accordion-body">
+              <p>
+                Yes, regular membership and general workshops are 100% free for all registered university students. 
+                Our lab equipment, workshop materials, and hackathon entries are funded through departmental support 
+                and industry tech sponsors.
+              </p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span>When and where are weekly meetings held?</span>
+              <i class="fa-solid fa-chevron-down accordion-icon"></i>
+            </button>
+            <div class="accordion-body">
+              <p>
+                We convene every Wednesday afternoon from 4:00 PM to 6:00 PM in the Campus Tech Hub (Room 301, Science & Tech Wing). 
+                We also host optional Saturday coding sprints and hybrid virtual live streams.
+              </p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span>How can I propose a project or lead a study group?</span>
+              <i class="fa-solid fa-chevron-down accordion-icon"></i>
+            </button>
+            <div class="accordion-body">
+              <p>
+                Any active member can pitch a project idea during our bi-weekly open-floor sessions or submit a proposal 
+                directly to the committee via the <a href="join.html" style="color:var(--color-primary); font-weight:600;">Join / Contact page</a>. 
+                The club provides repository hosting, server credits, and team recruitment support.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Universal Footer -->
+  <footer class="site-footer" id="footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div class="footer-brand">
+          <h4>Innovate Club.</h4>
+          <p>
+            University student society dedicated to technological innovation, hands-on programming, 
+            creative collaboration, and leadership development.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h5>Quick Links</h5>
+          <ul class="footer-links">
+            <li><a href="index.html"><i class="fa-solid fa-angle-right"></i> Home</a></li>
+            <li><a href="about.html"><i class="fa-solid fa-angle-right"></i> About Us</a></li>
+            <li><a href="activities.html"><i class="fa-solid fa-angle-right"></i> Activities & Events</a></li>
+            <li><a href="gallery.html"><i class="fa-solid fa-angle-right"></i> Photo Gallery</a></li>
+            <li><a href="join.html"><i class="fa-solid fa-angle-right"></i> Join / Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Meetings & Venue</h5>
+          <ul class="footer-links" style="font-size: 0.88rem; color: rgba(255,255,255,0.85); gap: 12px;">
+            <li><i class="fa-regular fa-clock" style="color:var(--color-primary-light);"></i> Wednesdays 4:00 PM – 6:00 PM</li>
+            <li><i class="fa-solid fa-location-dot" style="color:var(--color-primary-light);"></i> Tech Hub, Room 301</li>
+            <li><i class="fa-solid fa-graduation-cap" style="color:var(--color-primary-light);"></i> Open to All Departments</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Connect With Us</h5>
+          <p style="font-size: 0.88rem; color: rgba(255,255,255,0.8); margin-bottom: 16px;">
+            Follow our social accounts for schedule updates and workshop materials.
+          </p>
+          <div class="social-icons-row">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-circle-btn" aria-label="Facebook">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-circle-btn" aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-circle-btn" aria-label="Twitter">
+              <i class="fa-brands fa-x-twitter"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-circle-btn" aria-label="LinkedIn">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Innovate Club. All rights reserved.</p>
+        <p class="footer-course-tag">ICS 2102 — Web Development Semester Mini Project</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join / Contact Us — Innovate Club | Membership Application</title>
+  <meta name="description" content="Apply to join Innovate Club or contact the student executive committee for inquiries, sponsorships, and event partnerships.">
+  <link rel="icon" type="image/svg+xml" href="images/logo/favicon.svg">
+  
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Site Header & Shared Navigation -->
+  <header class="site-header" id="header">
+    <div class="container header-container">
+      <a href="index.html" class="brand-link" id="brandLogoLink">
+        <img src="images/logo/logo.svg" alt="Innovate Club Logo" class="brand-logo">
+      </a>
+
+      <nav class="nav-menu" id="navMenu" aria-label="Main Navigation">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link" id="navHome">Home</a></li>
+          <li><a href="about.html" class="nav-link" id="navAbout">About Us</a></li>
+          <li><a href="activities.html" class="nav-link" id="navActivities">Activities</a></li>
+          <li><a href="gallery.html" class="nav-link" id="navGallery">Gallery</a></li>
+          <li><a href="join.html" class="nav-cta-btn active" id="navJoin">Join / Contact <i class="fa-solid fa-arrow-right"></i></a></li>
+        </ul>
+      </nav>
+
+      <button class="mobile-toggle" id="mobileNavToggle" aria-label="Toggle Navigation Menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="main-content">
+
+    <!-- Page Header with Green Underline Accent & Instruction Line beneath -->
+    <section class="page-header">
+      <div class="container">
+        <h1 class="page-title">Join / Contact Us</h1>
+        <p class="page-subtitle">
+          Complete the membership application form below or reach out to our executive committee. 
+          All registered university students are welcome.
+        </p>
+      </div>
+    </section>
+
+    <!-- Form & Contact Information Grid -->
+    <section class="section" style="padding-top: 10px; padding-bottom: 80px;">
+      <div class="container">
+        
+        <div class="contact-layout-grid">
+          
+          <!-- Left: Membership & Contact Form -->
+          <div class="form-card" id="joinFormCard">
+            
+            <div class="form-header-box">
+              <h3>Student Application Form</h3>
+              <p>Please fill out your university academic details accurately. Fields marked with <span style="color:var(--color-danger);">*</span> are required.</p>
+            </div>
+
+            <!-- Dynamic Feedback Alert Banner -->
+            <div id="formResponseBanner" class="form-response-banner" role="alert"></div>
+
+            <!-- Main Form submitting to php/join.php -->
+            <form action="php/join.php" method="POST" id="joinClubForm" novalidate>
+              
+              <!-- Full Name Field -->
+              <div class="form-group">
+                <label for="fullname" class="form-label">Full Name <span class="req">*</span></label>
+                <input 
+                  type="text" 
+                  id="fullname" 
+                  name="fullname" 
+                  class="form-input" 
+                  placeholder="e.g. Alex Kiprono" 
+                  required
+                  autocomplete="name"
+                >
+                <span class="form-error-msg" id="nameError"></span>
+              </div>
+
+              <!-- Email & Phone Row -->
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="email" class="form-label">Email Address <span class="req">*</span></label>
+                  <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    class="form-input" 
+                    placeholder="student@university.edu" 
+                    required
+                    autocomplete="email"
+                  >
+                  <span class="form-error-msg" id="emailError"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="phone" class="form-label">Phone Number <span class="req">*</span></label>
+                  <input 
+                    type="tel" 
+                    id="phone" 
+                    name="phone" 
+                    class="form-input" 
+                    placeholder="+254 712 345 678" 
+                    required
+                    autocomplete="tel"
+                  >
+                  <span class="form-error-msg" id="phoneError"></span>
+                </div>
+              </div>
+
+              <!-- Department / Course & Year Row -->
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="course" class="form-label">Department / Course <span class="req">*</span></label>
+                  <select id="course" name="course" class="form-select" required>
+                    <option value="" disabled selected>-- Select your degree program --</option>
+                    <option value="Computer Science">BSc. Computer Science</option>
+                    <option value="Information Technology">BSc. Information Technology</option>
+                    <option value="Software Engineering">BSc. Software Engineering</option>
+                    <option value="Business Computing">BSc. Business Information Technology</option>
+                    <option value="Electrical Engineering">BSc. Electrical & Electronic Engineering</option>
+                    <option value="Data Science">BSc. Data Science & Analytics</option>
+                    <option value="Other Department">Other University Faculty</option>
+                  </select>
+                  <span class="form-error-msg" id="courseError"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="year_of_study" class="form-label">Year of Study</label>
+                  <select id="year_of_study" name="year_of_study" class="form-select">
+                    <option value="Year 1">Year 1 (Freshman)</option>
+                    <option value="Year 2" selected>Year 2 (Sophomore)</option>
+                    <option value="Year 3">Year 3 (Junior)</option>
+                    <option value="Year 4+">Year 4+ (Senior / Postgrad)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Primary Technical Interest Track -->
+              <div class="form-group">
+                <label for="interest" class="form-label">Primary Interest Track</label>
+                <select id="interest" name="interest" class="form-select">
+                  <option value="Web Development (HTML/CSS/JS/Fullstack)">Web Development (HTML/CSS/JS/Full-Stack)</option>
+                  <option value="Mobile App Development">Mobile App Development (Flutter / Android / iOS)</option>
+                  <option value="AI & Machine Learning">Artificial Intelligence & Data Science</option>
+                  <option value="UI/UX Product Design">UI/UX & Product Design</option>
+                  <option value="Cybersecurity & Cloud">Cybersecurity, DevOps & Cloud Computing</option>
+                  <option value="Hardware & IoT Robotics">Hardware, Embedded Systems & IoT</option>
+                </select>
+              </div>
+
+              <!-- Message / Reason for Joining (Textarea) -->
+              <div class="form-group">
+                <label for="message" class="form-label">Message / Why do you want to join? <span class="req">*</span></label>
+                <textarea 
+                  id="message" 
+                  name="message" 
+                  rows="4" 
+                  class="form-textarea" 
+                  placeholder="Share a few words about what you hope to learn, build, or contribute to Innovate Club..." 
+                  required
+                ></textarea>
+                <span class="form-error-msg" id="messageError"></span>
+              </div>
+
+              <!-- Terms & Code of Conduct Checkbox -->
+              <div class="checkbox-group">
+                <input type="checkbox" id="consent" name="consent" required>
+                <label for="consent" class="checkbox-label">
+                  I agree to abide by the <strong>Innovate Club Code of Conduct</strong>, respect fellow student members, 
+                  and participate actively in our collaborative learning events.
+                </label>
+              </div>
+              <span class="form-error-msg" id="consentError" style="margin-top: -18px; margin-bottom: 20px;"></span>
+
+              <!-- Green Submit Button -->
+              <button type="submit" class="btn btn-primary btn-lg" id="joinSubmitBtn" style="width: 100%;">
+                <i class="fa-solid fa-paper-plane"></i> Submit Application
+              </button>
+
+            </form>
+
+          </div>
+
+          <!-- Right Sidebar: Contact Information & Follow Us Card -->
+          <aside class="contact-sidebar">
+            
+            <div class="info-sidebar-card">
+              <h3 class="info-sidebar-title">Contact Information</h3>
+
+              <div class="contact-meta-list">
+                
+                <div class="contact-meta-item">
+                  <div class="contact-meta-icon">
+                    <i class="fa-solid fa-envelope"></i>
+                  </div>
+                  <div class="contact-meta-text">
+                    <strong>Official Club Email</strong>
+                    <a href="mailto:info@innovateclub.edu">info@innovateclub.edu</a>
+                  </div>
+                </div>
+
+                <div class="contact-meta-item">
+                  <div class="contact-meta-icon">
+                    <i class="fa-solid fa-phone"></i>
+                  </div>
+                  <div class="contact-meta-text">
+                    <strong>Club Phone Hotline</strong>
+                    <a href="tel:+254700123456">+254 (0) 700 123 456</a>
+                  </div>
+                </div>
+
+                <div class="contact-meta-item">
+                  <div class="contact-meta-icon">
+                    <i class="fa-solid fa-location-dot"></i>
+                  </div>
+                  <div class="contact-meta-text">
+                    <strong>Campus Lab Address</strong>
+                    <span>Campus Innovation Hub, Room 301, Science & Technology Complex</span>
+                  </div>
+                </div>
+
+                <div class="contact-meta-item">
+                  <div class="contact-meta-icon">
+                    <i class="fa-regular fa-clock"></i>
+                  </div>
+                  <div class="contact-meta-text">
+                    <strong>General Meeting Hours</strong>
+                    <span>Wednesdays 4:00 PM – 6:00 PM<br>Open coding labs on Saturdays</span>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Follow Us Social Icons (Facebook, Instagram, Twitter, LinkedIn CDN) -->
+              <div>
+                <h4 class="social-section-title">Follow Us</h4>
+                <div class="social-icons-row">
+                  <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-circle-btn" aria-label="Facebook">
+                    <i class="fa-brands fa-facebook-f"></i>
+                  </a>
+                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-circle-btn" aria-label="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                  </a>
+                  <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-circle-btn" aria-label="Twitter">
+                    <i class="fa-brands fa-x-twitter"></i>
+                  </a>
+                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-circle-btn" aria-label="LinkedIn">
+                    <i class="fa-brands fa-linkedin-in"></i>
+                  </a>
+                  <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-circle-btn" aria-label="GitHub">
+                    <i class="fa-brands fa-github"></i>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Quick FAQ Box -->
+            <div class="card-callout" style="margin-bottom: 0;">
+              <h4 style="font-size: 1.1rem; font-weight: 700; color: var(--color-primary-dark); margin-bottom: 8px;">
+                <i class="fa-solid fa-circle-info" style="color: var(--color-primary);"></i> Quick Note on Applications
+              </h4>
+              <p style="font-size: 0.9rem; color: var(--color-text-body); line-height: 1.6;">
+                Our committee processes new member applications within 48 hours. Once registered, you will be invited 
+                to our official Discord/Slack community and assigned to a project track.
+              </p>
+            </div>
+
+          </aside>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Universal Footer -->
+  <footer class="site-footer" id="footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div class="footer-brand">
+          <h4>Innovate Club.</h4>
+          <p>
+            University student society dedicated to technological innovation, hands-on programming, 
+            creative collaboration, and leadership development.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h5>Quick Links</h5>
+          <ul class="footer-links">
+            <li><a href="index.html"><i class="fa-solid fa-angle-right"></i> Home</a></li>
+            <li><a href="about.html"><i class="fa-solid fa-angle-right"></i> About Us</a></li>
+            <li><a href="activities.html"><i class="fa-solid fa-angle-right"></i> Activities & Events</a></li>
+            <li><a href="gallery.html"><i class="fa-solid fa-angle-right"></i> Photo Gallery</a></li>
+            <li><a href="join.html"><i class="fa-solid fa-angle-right"></i> Join / Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Meetings & Venue</h5>
+          <ul class="footer-links" style="font-size: 0.88rem; color: rgba(255,255,255,0.85); gap: 12px;">
+            <li><i class="fa-regular fa-clock" style="color:var(--color-primary-light);"></i> Wednesdays 4:00 PM – 6:00 PM</li>
+            <li><i class="fa-solid fa-location-dot" style="color:var(--color-primary-light);"></i> Tech Hub, Room 301</li>
+            <li><i class="fa-solid fa-graduation-cap" style="color:var(--color-primary-light);"></i> Open to All Departments</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Connect With Us</h5>
+          <p style="font-size: 0.88rem; color: rgba(255,255,255,0.8); margin-bottom: 16px;">
+            Questions about membership or event dates? Send us an email or message anytime.
+          </p>
+          <div class="social-icons-row">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-circle-btn" aria-label="Facebook">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-circle-btn" aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-circle-btn" aria-label="Twitter">
+              <i class="fa-brands fa-x-twitter"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-circle-btn" aria-label="LinkedIn">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Innovate Club. All rights reserved.</p>
+        <p class="footer-course-tag">ICS 2102 — Web Development Semester Mini Project</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

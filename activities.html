@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activities & Events — Innovate Club | Workshops, Hackathons & Seminars</title>
+  <meta name="description"
+    content="Explore upcoming coding workshops, tech hackathons, industry talks, and past activities organized by Innovate Club.">
+  <link rel="icon" type="image/svg+xml" href="images/logo/favicon.svg">
+
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- Site Header & Shared Navigation -->
+  <header class="site-header" id="header">
+    <div class="container header-container">
+      <a href="index.html" class="brand-link" id="brandLogoLink">
+        <img src="images/logo/logo.svg" alt="Innovate Club Logo" class="brand-logo">
+      </a>
+
+      <nav class="nav-menu" id="navMenu" aria-label="Main Navigation">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link" id="navHome">Home</a></li>
+          <li><a href="about.html" class="nav-link" id="navAbout">About Us</a></li>
+          <li><a href="activities.html" class="nav-link active" id="navActivities">Activities</a></li>
+          <li><a href="gallery.html" class="nav-link" id="navGallery">Gallery</a></li>
+          <li><a href="join.html" class="nav-cta-btn" id="navJoin">Join / Contact <i
+                class="fa-solid fa-arrow-right"></i></a></li>
+        </ul>
+      </nav>
+
+      <button class="mobile-toggle" id="mobileNavToggle" aria-label="Toggle Navigation Menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="main-content">
+
+    <!-- Page Header with Green Underline Accent -->
+    <section class="page-header">
+      <div class="container">
+        <h1 class="page-title">Activities & Events</h1>
+        <p class="page-subtitle">
+          Join our weekly hands-on coding sessions, campus hackathons, and guest tech talks.
+          Dynamic calendar rendered via client-side JavaScript.
+        </p>
+      </div>
+    </section>
+
+    <!-- Events Section -->
+    <section class="section" style="padding-top: 20px;">
+      <div class="container">
+
+        <!-- Interactive Toolbar: Tabs, Category Filter & Live Search -->
+        <div class="events-toolbar" id="eventsToolbar">
+
+          <!-- Tabs: Upcoming Events / Past Activities (Mockup requirement) -->
+          <div class="tabs-group" id="eventsTabsGroup">
+            <button class="tab-btn event-tab-btn active" data-tab="upcoming" id="tabUpcoming">
+              <i class="fa-regular fa-clock"></i> Upcoming Events
+            </button>
+            <button class="tab-btn event-tab-btn" data-tab="completed" id="tabPast">
+              <i class="fa-solid fa-clock-rotate-left"></i> Past Activities
+            </button>
+            <button class="tab-btn event-tab-btn" data-tab="all" id="tabAll">
+              <i class="fa-solid fa-list-ul"></i> All Events
+            </button>
+          </div>
+
+          <!-- Category Dropdown & Search -->
+          <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+            <select id="eventCategorySelect" class="form-select"
+              style="width: auto; padding: 8px 14px; font-size: 0.88rem; border-radius: var(--radius-full); cursor: pointer;"
+              aria-label="Filter events by category">
+              <option value="all">All Categories</option>
+              <option value="Workshops">Workshops</option>
+              <option value="Hackathons">Hackathons</option>
+              <option value="Tech Talks">Tech Talks</option>
+              <option value="Socials">Socials</option>
+            </select>
+
+            <div class="search-box">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" id="eventsSearchInput" placeholder="Search event, topic, venue..."
+                aria-label="Search events">
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Dynamic Events Container (Injected by js/script.js via loops and DOM methods) -->
+        <div class="events-container" id="eventsListContainer" aria-live="polite">
+          <!-- Fallback noscript or loading placeholder -->
+          <div class="empty-events-state">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+            <h3>Loading events...</h3>
+          </div>
+        </div>
+
+        <!-- View All Events Action -->
+        <div style="text-align: center; margin-top: 36px;">
+          <a href="join.html" class="btn btn-primary" id="viewAllEventsBtn">
+            <i class="fa-solid fa-calendar-plus"></i> Suggest a Future Event / Workshop
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Event Highlights Callout -->
+    <section class="section section-tint">
+      <div class="container" style="text-align: center; max-width: 760px;">
+        <h2 style="font-size: 1.8rem; font-weight: 800; color: var(--color-primary-dark); margin-bottom: 12px;">
+          Want to Host or Present a Topic?
+        </h2>
+        <p style="font-size: 1.05rem; color: var(--color-text-body); margin-bottom: 24px; line-height: 1.6;">
+          Student members who have learned a new programming framework, completed a cool side-project,
+          or want to lead a study cohort can request a speaking slot. We provide the auditorium, AV setup, and pizza!
+        </p>
+        <a href="join.html" class="btn btn-secondary"><i class="fa-regular fa-comment-dots"></i> Get In Touch With
+          Committee</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Universal Footer -->
+  <footer class="site-footer" id="footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div class="footer-brand">
+          <h4>Innovate Club.</h4>
+          <p>
+            University student society dedicated to technological innovation, hands-on programming,
+            creative collaboration, and leadership development.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h5>Quick Links</h5>
+          <ul class="footer-links">
+            <li><a href="index.html"><i class="fa-solid fa-angle-right"></i> Home</a></li>
+            <li><a href="about.html"><i class="fa-solid fa-angle-right"></i> About Us</a></li>
+            <li><a href="activities.html"><i class="fa-solid fa-angle-right"></i> Activities & Events</a></li>
+            <li><a href="gallery.html"><i class="fa-solid fa-angle-right"></i> Photo Gallery</a></li>
+            <li><a href="join.html"><i class="fa-solid fa-angle-right"></i> Join / Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Meetings & Venue</h5>
+          <ul class="footer-links" style="font-size: 0.88rem; color: rgba(255,255,255,0.85); gap: 12px;">
+            <li><i class="fa-regular fa-clock" style="color:var(--color-primary-light);"></i> Wednesdays 4:00 PM – 6:00
+              PM</li>
+            <li><i class="fa-solid fa-location-dot" style="color:var(--color-primary-light);"></i> Tech Hub, Room 301
+            </li>
+            <li><i class="fa-solid fa-graduation-cap" style="color:var(--color-primary-light);"></i> Open to All
+              Departments</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Connect With Us</h5>
+          <p style="font-size: 0.88rem; color: rgba(255,255,255,0.8); margin-bottom: 16px;">
+            Stay plugged into workshop announcements and code repo links.
+          </p>
+          <div class="social-icons-row">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-circle-btn"
+              aria-label="Facebook">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-circle-btn"
+              aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-circle-btn"
+              aria-label="Twitter">
+              <i class="fa-brands fa-x-twitter"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-circle-btn"
+              aria-label="LinkedIn">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Innovate Club. All rights reserved.</p>
+        <p class="footer-course-tag">ICS 2102 — Web Development Semester Mini Project</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+
+</html>
