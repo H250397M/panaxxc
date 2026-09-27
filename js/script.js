@@ -18,11 +18,11 @@ document.addEventListener('DOMContentLoaded', () => {
   initGalleryLightbox();
   initFaqAccordion();
   initJoinFormValidation();
-});
+}); 
 
-/* ==========================================================================
-   1. Navigation & Header Utilities (Week 1)
-   ========================================================================== */
+/* 
+   1. Navigation & Header Utilities (Week 1) ndopandamaisa apa  nhasi  1 sepetember 2025
+   */
 function initMobileNav() {
   const toggleBtn = document.getElementById('mobileNavToggle');
   const navMenu = document.getElementById('navMenu');
@@ -60,9 +60,9 @@ function initHeaderScroll() {
   });
 }
 
-/* ==========================================================================
+/* 
    2. Next Event Countdown Timer (Home Page & Activities)
-   ========================================================================== */
+    */
 function initCountdown() {
   const daysEl = document.getElementById('cdDays');
   const hoursEl = document.getElementById('cdHours');
@@ -103,9 +103,9 @@ function initCountdown() {
   setInterval(updateTimer, 1000);
 }
 
-/* ==========================================================================
-   3. Activities & Events Dynamic Engine (Week 2 Requirement)
-   ========================================================================== */
+/* 
+   3. Activities & Events Dynamic Engine (Week 2 Requirement) yaa pakaipa mmm 
+   */
 // JavaScript Array of Objects holding club events
 const clubEventsData = [
   {
@@ -364,9 +364,9 @@ function openEventModal(eventId) {
   };
 }
 
-/* ==========================================================================
+/*
    4. Gallery Lightbox & Category Filter (Week 3 Requirement)
-   ========================================================================== */
+   */
 function initGalleryLightbox() {
   const galleryItems = document.querySelectorAll('.gallery-card');
   const lightbox = document.getElementById('galleryLightbox');

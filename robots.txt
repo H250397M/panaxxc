@@ -1,0 +1,32 @@
+# ==============================================================================
+# ICS 2102 — Web Development Semester Mini Project
+# robots.txt for Innovate Club Website
+# ==============================================================================
+
+User-agent: *
+
+# Allow search engines to crawl public pages and static assets
+Allow: /
+Allow: /index.html
+Allow: /about.html
+Allow: /activities.html
+Allow: /gallery.html
+Allow: /join.html
+Allow: /sitemap.html
+Allow: /css/
+Allow: /js/
+Allow: /images/
+
+# Disallow sensitive backend PHP scripts and database configuration files
+Disallow: /php/
+Disallow: /php/db.php
+Disallow: /php/join.php
+Disallow: /php/process.php
+Disallow: /php/database.sql
+Disallow: /*.sqlite$
+
+# Crawl Delay (optional courteous crawl rate)
+Crawl-delay: 1
+
+# XML Sitemap Location (Update domain upon production deployment)
+Sitemap: https://innovateclub.edu/sitemap.xml

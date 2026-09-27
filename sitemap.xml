@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ICS 2102 — Web Development Semester Mini Project
+  XML Sitemap for Innovate Club Website
+  Protocol: http://www.sitemaps.org/schemas/sitemap/0.9
+  Note: Replace 'https://innovateclub.edu/' with your live domain upon hosting deployment.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- 1. Home Page -->
+  <url>
+    <loc>https://innovateclub.edu/index.html</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://innovateclub.edu/images/hero-collaboration.jpg</image:loc>
+      <image:title>University Students Collaborating in Campus Innovation Lab</image:title>
+      <image:caption>Innovate Club students working together on tech projects</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://innovateclub.edu/images/logo/logo.svg</image:loc>
+      <image:title>Innovate Club Official Logo</image:title>
+    </image:image>
+  </url>
+
+  <!-- 2. About Us Page -->
+  <url>
+    <loc>https://innovateclub.edu/about.html</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://innovateclub.edu/images/president.jpg</image:loc>
+      <image:title>Amina Kimani - Club President</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://innovateclub.edu/images/vice-president.jpg</image:loc>
+      <image:title>David Omondi - Vice President</image:title>
+    </image:image>
+  </url>
+
+  <!-- 3. Activities & Events Page -->
+  <url>
+    <loc>https://innovateclub.edu/activities.html</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- 4. Photo Gallery Page -->
+  <url>
+    <loc>https://innovateclub.edu/gallery.html</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://innovateclub.edu/images/gallery/hackathon-2025.jpg</image:loc>
+      <image:title>Campus Hackathon 2024 Demo Stage</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://innovateclub.edu/images/gallery/web-workshop.jpg</image:loc>
+      <image:title>Web Development Coding Workshop</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://innovateclub.edu/images/gallery/campus-networking.jpg</image:loc>
+      <image:title>Campus Social and Networking Quad</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://innovateclub.edu/images/gallery/project-showcase.jpg</image:loc>
+      <image:title>University Innovation Exhibition Booth</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://innovateclub.edu/images/gallery/guest-keynote.jpg</image:loc>
+      <image:title>Tech Trends Guest Keynote Lecture</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://innovateclub.edu/images/gallery/code-sprint.jpg</image:loc>
+      <image:title>Collaborative Pair Programming Lab</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://innovateclub.edu/images/gallery/robotics-lab.jpg</image:loc>
+      <image:title>Smart Hardware and IoT Prototyping</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://innovateclub.edu/images/gallery/annual-gala.jpg</image:loc>
+      <image:title>Annual Club Gala and Celebration</image:title>
+    </image:image>
+  </url>
+
+  <!-- 5. Join / Contact Page -->
+  <url>
+    <loc>https://innovateclub.edu/join.html</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+</urlset>
