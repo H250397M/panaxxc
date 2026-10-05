@@ -12,7 +12,7 @@
 
 // Database Configuration Constants
 define('DB_HOST', 'localhost');
-define('DB_PORT', '3306');
+define('DB_PORT', '3307');
 define('DB_NAME', 'innovate_club_db');
 define('DB_USER', 'root');
 define('DB_PASS', '');

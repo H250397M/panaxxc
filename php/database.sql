@@ -1,10 +1,4 @@
--- =========================================================================
--- ICS 2102 — Web Development Semester Mini Project
--- Database Schema: Innovate Club Member Management System
--- File: php/database.sql
--- =========================================================================
 
--- Create Database if not already present
 CREATE DATABASE IF NOT EXISTS `innovate_club_db`
 DEFAULT CHARACTER SET utf8mb4
 COLLATE utf8mb4_unicode_ci;
