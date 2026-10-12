@@ -1,9 +1,14 @@
 
-CREATE DATABASE IF NOT EXISTS `innovate_club_db`
-DEFAULT CHARACTER SET utf8mb4
-COLLATE utf8mb4_unicode_ci;
+-- ==============================================================================
+-- Database Schema for Innovate Club (ICS 2102)
+-- NOTE FOR SHARED HOSTING (e.g. InfinityFree / cPanel / Alwaysdata):
+-- 1. Create a MySQL database in your hosting control panel (e.g. if0_XXXX_innovate).
+-- 2. Open phpMyAdmin, select that database, and import this file.
+-- 3. Leave the 'CREATE DATABASE' lines commented out below so you don't get an "Access Denied" error.
+-- ==============================================================================
 
-USE `innovate_club_db`;
+-- CREATE DATABASE IF NOT EXISTS `innovate_club_db` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+-- USE `innovate_club_db`;
 
 -- Table structure for club member applications and contact submissions
 DROP TABLE IF EXISTS `club_members`;

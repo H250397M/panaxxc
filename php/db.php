@@ -10,9 +10,23 @@
  * - This file creates a persistent PDO connection with error handling.
  */
 
-// Database Configuration Constants
+// ==============================================================================
+// Database Configuration
+// ==============================================================================
+// For Local Testing (XAMPP):
+//   DB_HOST = 'localhost', DB_PORT = '3307' (or '3306'), DB_USER = 'root', DB_PASS = ''
+//
+// For Free Web Hosting (e.g., InfinityFree / cPanel):
+//   Copy the exact MySQL Details from your InfinityFree Client Area:
+//   DB_HOST = 'sqlXXX.infinityfree.com' (e.g. sql100.infinityfree.com)
+//   DB_PORT = '3306'
+//   DB_NAME = 'if0_XXXXXXXX_innovate_db'
+//   DB_USER = 'if0_XXXXXXXX'
+//   DB_PASS = 'YourVpanelPassword'
+// ==============================================================================
+
 define('DB_HOST', 'localhost');
-define('DB_PORT', '3307');
+define('DB_PORT', '3307'); // Set to '3306' or leave empty for remote hosts like InfinityFree
 define('DB_NAME', 'innovate_club_db');
 define('DB_USER', 'root');
 define('DB_PASS', '');
@@ -25,12 +39,18 @@ function getDatabaseConnection() {
     }
 
     try {
-        // Attempt MySQL PDO connection
-        $dsn = "mysql:host=" . DB_HOST . ";port=" . DB_PORT . ";dbname=" . DB_NAME . ";charset=utf8mb4";
+        // Build DSN - use custom port if specified, otherwise default MySQL 3306
+        $dsn = "mysql:host=" . DB_HOST;
+        if (defined('DB_PORT') && !empty(DB_PORT) && DB_PORT !== '3306') {
+            $dsn .= ";port=" . DB_PORT;
+        }
+        $dsn .= ";dbname=" . DB_NAME . ";charset=utf8mb4";
+
         $options = [
             PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
             PDO::ATTR_EMULATE_PREPARES   => false,
+            PDO::ATTR_TIMEOUT            => 5,
         ];
         
         $pdo = new PDO($dsn, DB_USER, DB_PASS, $options);
