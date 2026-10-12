@@ -53,6 +53,22 @@ if (empty($message) || strlen($message) < 10) {
     $errors[] = 'Please enter a message / reason for joining of at least 10 characters.';
 }
 
+// Check for duplicate registration (Members cannot join twice)
+try {
+    $pdo = getDatabaseConnection();
+    if ($pdo) {
+        $checkStmt = $pdo->prepare("SELECT id, fullname, created_at FROM club_members WHERE LOWER(email) = LOWER(:email) LIMIT 1");
+        $checkStmt->execute([':email' => $email]);
+        $existing = $checkStmt->fetch();
+        if ($existing) {
+            $regDate = !empty($existing['created_at']) ? date('M j, Y', strtotime($existing['created_at'])) : 'previously';
+            $errors[] = "You cannot join twice! An application with the email '{$email}' is already registered (registered on {$regDate}). If you need to make changes, please contact the club secretariat.";
+        }
+    }
+} catch (Exception $e) {
+    error_log("Database duplicate check error: " . $e->getMessage());
+}
+
 // If validation errors exist
 if (!empty($errors)) {
     if ($isAjax) {
@@ -64,15 +80,24 @@ if (!empty($errors)) {
         ]);
         exit;
     } else {
-        echo "<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><title>Submission Error</title>";
+        echo "<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><title>Registration Notice — Innovate Club</title>";
         echo "<link rel='stylesheet' href='../css/style.css'></head><body style='padding:50px; background:#F8FAFC;'>";
-        echo "<div class='container' style='max-width:600px; background:#fff; padding:40px; border-radius:16px; border:1px solid #E2E8F0; text-align:center;'>";
-        echo "<h2 style='color:#EF4444;'>Submission Incomplete</h2>";
-        echo "<p style='color:#64748B; margin: 16px 0;'>" . htmlspecialchars(implode(' ', $errors)) . "</p>";
-        echo "<a href='../join.html' class='btn btn-primary'>&larr; Return to Form</a>";
-        echo "</div></body></html>";
+        echo "<div class='container' style='max-width:620px; background:#fff; padding:40px; border-radius:16px; border:1px solid #E2E8F0; text-align:center;'>";
+        echo "<h2 style='color:#DC2626; margin-bottom:12px;'>Registration Notice</h2>";
+        echo "<p style='color:#475569; margin: 16px 0; font-size:1.05rem; line-height:1.6;'>" . htmlspecialchars(implode(' ', $errors)) . "</p>";
+        echo "<div style='display:flex; justify-content:center; gap:12px; margin-top:24px;'>";
+        echo "<a href='../join.html' class='btn btn-secondary'>&larr; Return to Form</a>";
+        echo "<a href='../members.html' class='btn btn-primary'>View Members Directory</a>";
+        echo "</div></div></body></html>";
         exit;
     }
+}
+
+require_once __DIR__ . '/mailer.php';
+
+// Helper: Send branded HTML welcome & notification email to new member
+function sendWelcomeEmail($fullname, $email, $refNumber, $course, $year_of_study, $interest) {
+    return sendClubWelcomeEmail($email, $fullname, $refNumber, $course, $year_of_study, $interest);
 }
 
 // 3. Database Insertion
@@ -80,7 +105,9 @@ $dbInserted = false;
 $recordId = null;
 
 try {
-    $pdo = getDatabaseConnection();
+    if (!$pdo) {
+        $pdo = getDatabaseConnection();
+    }
     if ($pdo) {
         $ip_address = $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1';
         $stmt = $pdo->prepare("
@@ -105,23 +132,26 @@ try {
     }
 } catch (Exception $e) {
     error_log("Database insert failure: " . $e->getMessage());
-    // Continue gracefully so user still sees receipt
 }
 
 $refNumber = 'INN-' . ($recordId ? str_pad($recordId, 5, '0', STR_PAD_LEFT) : rand(10000, 99999));
 
-// 4. Send Response
+// 4. Send Welcome & Notification Email
+$emailDispatched = sendWelcomeEmail($fullname, $email, $refNumber, $course, $year_of_study, $interest);
+
+// 5. Send Response
 if ($isAjax) {
     header('Content-Type: application/json');
     echo json_encode([
         'status'  => 'success',
-        'message' => "Welcome to Innovate Club, {$fullname}! Your membership application has been received.",
+        'message' => "Welcome to Innovate Club, {$fullname}! Your membership has been saved and a welcome confirmation email has been dispatched to {$email}.",
         'data'    => [
-            'reference' => $refNumber,
-            'fullname'  => $fullname,
-            'email'     => $email,
-            'course'    => $course,
-            'db_saved'  => $dbInserted
+            'reference'   => $refNumber,
+            'fullname'    => $fullname,
+            'email'       => $email,
+            'course'      => $course,
+            'db_saved'    => $dbInserted,
+            'email_sent'  => $emailDispatched
         ]
     ]);
     exit;
@@ -161,7 +191,7 @@ if ($isAjax) {
           Application Submitted!
         </h1>
         <p style="font-size: 1.05rem; color: var(--color-text-muted); margin-bottom: 24px;">
-          Thank you for applying to join <strong>Innovate Club</strong>. Your application has been logged and our executive committee will review your submission.
+          Welcome to <strong>Innovate Club</strong>! Your application has been saved to the database and a welcome confirmation email has been dispatched to <strong><?php echo htmlspecialchars($email); ?></strong>.
         </p>
 
         <div style="background-color: var(--color-bg-alt); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 20px; text-align: left; margin-bottom: 28px;">
@@ -175,7 +205,8 @@ if ($isAjax) {
         </div>
 
         <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
-          <a href="../index.html" class="btn btn-primary"><i class="fa-solid fa-house"></i> Home Page</a>
+          <a href="../members.html" class="btn btn-primary"><i class="fa-solid fa-users"></i> View Members Directory</a>
+          <a href="../index.html" class="btn btn-secondary"><i class="fa-solid fa-house"></i> Home Page</a>
           <a href="../activities.html" class="btn btn-secondary"><i class="fa-solid fa-calendar-days"></i> Explore Events</a>
         </div>
       </div>

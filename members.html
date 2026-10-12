@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Club Members Directory — Innovate Club (Members Only)</title>
+  <meta name="description" content="Innovate Club Student Member Database and Directory. Restricted to registered members only. Read-only roster.">
+  <link rel="icon" type="image/svg+xml" href="images/logo/favicon.svg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Member Portal Access Gate */
+    .auth-gate-box {
+      max-width: 520px;
+      margin: 40px auto 60px;
+      background: #FFFFFF;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 44px 36px;
+      text-align: center;
+      box-shadow: var(--shadow-md);
+    }
+    .auth-gate-icon {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      background: var(--color-primary-soft);
+      color: var(--color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      margin: 0 auto 20px;
+    }
+    .auth-error-alert {
+      background: #FEE2E2;
+      border: 1px solid #FCA5A5;
+      color: #991B1B;
+      padding: 14px 16px;
+      border-radius: var(--radius-md);
+      margin-bottom: 20px;
+      font-size: 0.92rem;
+      text-align: left;
+      display: none;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    
+    /* Verified Member Bar */
+    .member-session-bar {
+      background: #ECFDF5;
+      border: 1px solid #A7F3D0;
+      border-radius: var(--radius-md);
+      padding: 14px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 30px;
+    }
+    .readonly-badge {
+      background: #FEF3C7;
+      color: #92400E;
+      font-weight: 700;
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* KPI and Roster Layout */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-bottom: 36px;
+    }
+    .kpi-card {
+      background: #FFFFFF;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 22px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+    .kpi-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+    .kpi-val {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--color-text-main);
+      line-height: 1.1;
+    }
+    .kpi-lbl {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .controls-panel {
+      background: #FFFFFF;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .search-box {
+      flex: 1 1 280px;
+      position: relative;
+    }
+    .search-box input {
+      width: 100%;
+      padding: 10px 14px 10px 38px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+      outline: none;
+    }
+    .search-box input:focus {
+      border-color: var(--color-primary);
+    }
+    .search-box i {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--color-text-muted);
+    }
+    .filter-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .filter-select {
+      padding: 10px 14px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      background: #FFFFFF;
+      color: var(--color-text-main);
+      cursor: pointer;
+    }
+    .table-responsive {
+      background: #FFFFFF;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      overflow-x: auto;
+      box-shadow: var(--shadow-sm);
+    }
+    .roster-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    .roster-table th {
+      background: #F8FAFC;
+      padding: 14px 18px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .roster-table td {
+      padding: 14px 18px;
+      border-bottom: 1px solid #F1F5F9;
+      font-size: 0.92rem;
+      vertical-align: middle;
+    }
+    .roster-table tr:hover {
+      background-color: #F8FAFC;
+    }
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+    .badge-pill.new {
+      background: #DCFCE7;
+      color: #15803D;
+    }
+    .badge-pill.track {
+      background: #EEF2FF;
+      color: #4338CA;
+    }
+    .member-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--color-primary-soft);
+      color: var(--color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body style="background-color: var(--color-bg-alt);">
+
+  <!-- Universal Site Header -->
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="index.html" class="brand-link">
+        <img src="images/logo/logo.svg" alt="Innovate Club" class="brand-logo" style="height:42px;">
+      </a>
+      
+      <nav class="nav-menu" id="navMenu" aria-label="Main Navigation">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="about.html" class="nav-link">About Us</a></li>
+          <li><a href="activities.html" class="nav-link">Activities</a></li>
+          <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+          <li><a href="members.html" class="nav-link active">Members</a></li>
+          <li><a href="join.html" class="nav-cta-btn"><i class="fa-solid fa-user-plus"></i> Join Now</a></li>
+        </ul>
+      </nav>
+
+      <button class="mobile-toggle" id="mobileNavToggle" aria-label="Toggle Navigation">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="main-content" style="padding: 40px 0 80px;">
+    <div class="container">
+
+      <!-- ================================================================= -->
+      <!-- VIEW 1: LOCKED AUTHENTICATION GATE (Visible if not verified)     -->
+      <!-- ================================================================= -->
+      <section id="authGateSection" class="auth-gate-box">
+        <div class="auth-gate-icon">
+          <i class="fa-solid fa-user-shield"></i>
+        </div>
+        <h2 style="font-size: 1.85rem; font-weight:800; color:var(--color-text-main); margin-bottom: 8px;">
+          Members Portal Access
+        </h2>
+        <p style="color:var(--color-text-muted); font-size: 0.96rem; margin-bottom: 24px; line-height: 1.5;">
+          This member directory is <strong>restricted to registered members only</strong>. Please enter the email address you registered with to verify your membership and unlock the roster.
+        </p>
+
+        <!-- Inline Error Alert -->
+        <div id="authErrorAlert" class="auth-error-alert" role="alert">
+          <i class="fa-solid fa-triangle-exclamation" style="font-size:1.1rem; flex-shrink:0;"></i>
+          <span id="authErrorMessage">Access denied.</span>
+        </div>
+
+        <form id="memberLoginForm" novalidate style="text-align: left;">
+          <div class="form-group" style="margin-bottom: 18px;">
+            <label for="memberEmailInput" class="form-label">Your Registered Email <span class="req">*</span></label>
+            <input 
+              type="email" 
+              id="memberEmailInput" 
+              class="form-input" 
+              placeholder="e.g. student@university.edu" 
+              required
+              autocomplete="email"
+            >
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg" id="verifyBtn" style="width: 100%;">
+            <i class="fa-solid fa-key"></i> Verify & Unlock Directory
+          </button>
+        </form>
+
+        <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--color-border); font-size: 0.9rem; color: var(--color-text-muted);">
+          Not registered yet? <a href="join.html" style="color: var(--color-primary); font-weight: 700;">Apply on the Join page &rarr;</a>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- VIEW 2: UNLOCKED MEMBER DIRECTORY (Visible ONLY after login)      -->
+      <!-- ================================================================= -->
+      <section id="directorySection" style="display: none;">
+        
+        <!-- Verified Member Status Banner -->
+        <div class="member-session-bar">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <i class="fa-solid fa-circle-check" style="font-size:1.6rem; color:#059669;"></i>
+            <div>
+              <strong style="color:#065F46; font-size:1rem;" id="sessionMemberName">Verified Member</strong>
+              <div style="font-size:0.85rem; color:#047857;" id="sessionMemberEmail">signed in</div>
+            </div>
+          </div>
+
+          <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+            <span class="readonly-badge">
+              <i class="fa-solid fa-shield-halved"></i> Read-Only Roster (Editing Disabled)
+            </span>
+            <button id="lockDirectoryBtn" class="btn btn-secondary btn-sm" style="padding:6px 14px; font-size:0.85rem;">
+              <i class="fa-solid fa-arrow-right-from-bracket"></i> Lock Directory
+            </button>
+          </div>
+        </div>
+
+        <!-- Directory Header -->
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-bottom:28px;">
+          <div>
+            <h1 style="font-size: 2.1rem; font-weight:800; color:var(--color-text-main); margin-bottom:4px;">
+              Club Members Directory
+            </h1>
+            <p style="color:var(--color-text-muted); font-size:1rem;">
+              Confirmed student members in Innovate Club.
+            </p>
+          </div>
+          
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <button id="exportCsvBtn" class="btn btn-secondary btn-sm">
+              <i class="fa-solid fa-file-csv"></i> Export CSV
+            </button>
+            <a href="join.html" class="btn btn-primary btn-sm">
+              <i class="fa-solid fa-plus"></i> New Application
+            </a>
+          </div>
+        </div>
+
+        <!-- KPI Cards -->
+        <div class="stats-row">
+          <div class="kpi-card">
+            <div class="kpi-icon" style="background:var(--color-primary-soft); color:var(--color-primary);">
+              <i class="fa-solid fa-users"></i>
+            </div>
+            <div>
+              <div class="kpi-val" id="kpiTotal">0</div>
+              <div class="kpi-lbl">Total Registered</div>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-icon" style="background:#FEF3C7; color:#D97706;">
+              <i class="fa-solid fa-bolt"></i>
+            </div>
+            <div>
+              <div class="kpi-val" id="kpiNew">0</div>
+              <div class="kpi-lbl">New Members</div>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-icon" style="background:#EEF2FF; color:#4F46E5;">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <div>
+              <div class="kpi-val" style="font-size:1.2rem;" id="kpiDept">—</div>
+              <div class="kpi-lbl">Leading Department</div>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-icon" style="background:#FCE7F3; color:#DB2777;">
+              <i class="fa-solid fa-code"></i>
+            </div>
+            <div>
+              <div class="kpi-val" style="font-size:1.15rem;" id="kpiTrack">—</div>
+              <div class="kpi-lbl">Top Interest Track</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Search & Filter Controls -->
+        <div class="controls-panel">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="memberSearch" placeholder="Search by name, email, or reference number...">
+          </div>
+
+          <div class="filter-group">
+            <select id="courseFilter" class="filter-select">
+              <option value="all">All Departments</option>
+              <option value="Computer Science">Computer Science</option>
+              <option value="Information Technology">Information Technology</option>
+              <option value="Software Engineering">Software Engineering</option>
+              <option value="Electrical Engineering">Electrical Engineering</option>
+              <option value="Data Science">Data Science</option>
+            </select>
+
+            <select id="trackFilter" class="filter-select">
+              <option value="all">All Tracks</option>
+              <option value="Web Development">Web Development</option>
+              <option value="AI">AI & Machine Learning</option>
+              <option value="Mobile">Mobile Apps</option>
+              <option value="Cybersecurity">Cybersecurity & Cloud</option>
+              <option value="UI/UX">UI/UX Design</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Read-Only Members Table -->
+        <div class="table-responsive">
+          <table class="roster-table">
+            <thead>
+              <tr>
+                <th>Member</th>
+                <th>Reference ID</th>
+                <th>Contact Details</th>
+                <th>Department / Degree</th>
+                <th>Year</th>
+                <th>Track</th>
+                <th>Date Joined</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="membersTableBody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-bottom">
+      <p>&copy; 2025 Innovate Club. Harare Institute of Technology.</p>
+      <p class="footer-course-tag">ICS 2102 — Web Development Semester Mini Project</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initProtectedMembersPortal();
+    });
+
+    function initProtectedMembersPortal() {
+      const authGateSection = document.getElementById('authGateSection');
+      const directorySection = document.getElementById('directorySection');
+      const loginForm = document.getElementById('memberLoginForm');
+      const emailInput = document.getElementById('memberEmailInput');
+      const verifyBtn = document.getElementById('verifyBtn');
+      const errorAlert = document.getElementById('authErrorAlert');
+      const errorMessage = document.getElementById('authErrorMessage');
+      const lockDirectoryBtn = document.getElementById('lockDirectoryBtn');
+
+      const sessionMemberName = document.getElementById('sessionMemberName');
+      const sessionMemberEmail = document.getElementById('sessionMemberEmail');
+
+      const tableBody = document.getElementById('membersTableBody');
+      const searchInput = document.getElementById('memberSearch');
+      const courseFilter = document.getElementById('courseFilter');
+      const trackFilter = document.getElementById('trackFilter');
+      const exportBtn = document.getElementById('exportCsvBtn');
+
+      const kpiTotal = document.getElementById('kpiTotal');
+      const kpiNew = document.getElementById('kpiNew');
+      const kpiDept = document.getElementById('kpiDept');
+      const kpiTrack = document.getElementById('kpiTrack');
+
+      // Seed fallback members
+      const seedMembers = [
+        {
+          id: 'INN-00001',
+          fullname: 'Alex Kiprono',
+          email: 'alex.kip@strathmore.edu',
+          phone: '+254 712 345 678',
+          course: 'Computer Science',
+          year_of_study: 'Year 2',
+          interest: 'Web Development',
+          created_at: '2025-09-01T10:00:00Z',
+          isRecent: false
+        },
+        {
+          id: 'INN-00002',
+          fullname: 'Faith Muthoni',
+          email: 'faith.m@uonbi.ac.ke',
+          phone: '+254 723 456 789',
+          course: 'Software Engineering',
+          year_of_study: 'Year 3',
+          interest: 'AI & Machine Learning',
+          created_at: '2025-09-08T12:00:00Z',
+          isRecent: false
+        },
+        {
+          id: 'INN-00003',
+          fullname: 'Brian Ochieng',
+          email: 'brian.och@jkuat.ac.ke',
+          phone: '+254 734 567 890',
+          course: 'Information Technology',
+          year_of_study: 'Year 1',
+          interest: 'Cybersecurity & Cloud',
+          created_at: '2025-09-15T09:30:00Z',
+          isRecent: false
+        }
+      ];
+
+      let allMembers = [];
+
+      // Check for active session in sessionStorage
+      const existingSession = sessionStorage.getItem('innovate_club_member_session');
+      if (existingSession) {
+        try {
+          const sessionUser = JSON.parse(existingSession);
+          unlockDirectory(sessionUser);
+        } catch (e) {
+          sessionStorage.removeItem('innovate_club_member_session');
+          lockDirectory();
+        }
+      } else {
+        lockDirectory();
+      }
+
+      // Verification / Login submit handler
+      loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        hideError();
+
+        const inputEmail = emailInput.value.trim().toLowerCase();
+        if (!inputEmail) {
+          showError('Please enter your registered email address.');
+          return;
+        }
+
+        verifyBtn.disabled = true;
+        verifyBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Verifying Membership...';
+
+        try {
+          // 1. Try PHP Backend verification
+          let verifiedMember = null;
+          try {
+            const res = await fetch(`php/members.php?action=verify&email=${encodeURIComponent(inputEmail)}`);
+            if (res.ok) {
+              const result = await res.json();
+              if (result.status === 'success' && result.member) {
+                verifiedMember = result.member;
+              }
+            }
+          } catch (netErr) {
+            console.log('Static preview mode; checking client-side records.');
+          }
+
+          // 2. If PHP not running, check localStorage submissions & seed members
+          if (!verifiedMember) {
+            const localSubmissions = JSON.parse(localStorage.getItem('innovate_club_submissions') || '[]');
+            const foundLocal = localSubmissions.find(s => s.email && s.email.trim().toLowerCase() === inputEmail);
+            if (foundLocal) {
+              verifiedMember = {
+                fullname: foundLocal.name || foundLocal.fullname,
+                email: foundLocal.email,
+                id: foundLocal.id
+              };
+            } else {
+              const foundSeed = seedMembers.find(s => s.email.toLowerCase() === inputEmail);
+              if (foundSeed) {
+                verifiedMember = foundSeed;
+              }
+            }
+          }
+
+          // 3. Grant access or reject
+          if (verifiedMember) {
+            sessionStorage.setItem('innovate_club_member_session', JSON.stringify(verifiedMember));
+            unlockDirectory(verifiedMember);
+          } else {
+            showError(`Access denied: The email "${inputEmail}" was not found in our membership records. Only registered accounts can view this directory.`);
+          }
+
+        } catch (err) {
+          showError('An error occurred during verification. Please try again.');
+        } finally {
+          verifyBtn.disabled = false;
+          verifyBtn.innerHTML = '<i class="fa-solid fa-key"></i> Verify & Unlock Directory';
+        }
+      });
+
+      // Sign Out / Lock directory
+      lockDirectoryBtn.addEventListener('click', () => {
+        sessionStorage.removeItem('innovate_club_member_session');
+        // Notify PHP backend logout
+        fetch('php/members.php?action=logout&ajax=1').catch(() => {});
+        lockDirectory();
+      });
+
+      function showError(msg) {
+        errorMessage.textContent = msg;
+        errorAlert.style.display = 'flex';
+      }
+
+      function hideError() {
+        errorAlert.style.display = 'none';
+      }
+
+      function lockDirectory() {
+        authGateSection.style.display = 'block';
+        directorySection.style.display = 'none';
+        emailInput.value = '';
+      }
+
+      async function unlockDirectory(member) {
+        authGateSection.style.display = 'none';
+        directorySection.style.display = 'block';
+
+        sessionMemberName.textContent = 'Verified Member: ' + (member.fullname || member.name || 'Student');
+        sessionMemberEmail.textContent = 'Signed in with ' + (member.email || '');
+
+        await loadMembersData(member.email);
+      }
+
+      async function loadMembersData(authEmail) {
+        allMembers = [];
+
+        // 1. Try to fetch from backend PHP API with auth
+        try {
+          const res = await fetch(`php/members.php?action=api&auth_email=${encodeURIComponent(authEmail || '')}`);
+          if (res.ok) {
+            const result = await res.json();
+            if (result.status === 'success' && Array.isArray(result.data) && result.data.length > 0) {
+              allMembers = result.data.map(item => ({
+                id: item.id ? ('INN-' + String(item.id).padStart(5, '0')) : 'INN-00000',
+                fullname: item.fullname,
+                email: item.email,
+                phone: item.phone,
+                course: item.course,
+                year_of_study: item.year_of_study || 'Year 1',
+                interest: item.interest || 'General Tech',
+                created_at: item.created_at || new Date().toISOString(),
+                isRecent: isRecentDate(item.created_at)
+              }));
+            }
+          }
+        } catch (e) {
+          console.log('Static preview mode; loading offline submissions.');
+        }
+
+        // 2. If backend empty/offline, load from localStorage + seed
+        if (allMembers.length === 0) {
+          const localSubmissions = JSON.parse(localStorage.getItem('innovate_club_submissions') || '[]');
+          const localFormatted = localSubmissions.map(item => ({
+            id: item.id || 'INN-NEW',
+            fullname: item.name || item.fullname,
+            email: item.email,
+            phone: item.phone,
+            course: item.course,
+            year_of_study: item.year || item.year_of_study || 'Year 1',
+            interest: item.interest || 'General Tech',
+            created_at: item.date || new Date().toISOString(),
+            isRecent: true
+          }));
+
+          allMembers = [...localFormatted, ...seedMembers];
+        }
+
+        updateKPIs(allMembers);
+        renderTable(allMembers);
+      }
+
+      function isRecentDate(dateStr) {
+        if (!dateStr) return true;
+        const diffMs = Date.now() - new Date(dateStr).getTime();
+        return diffMs < 1000 * 60 * 60 * 24 * 7;
+      }
+
+      function updateKPIs(data) {
+        kpiTotal.textContent = data.length;
+        kpiNew.textContent = data.filter(m => m.isRecent).length;
+
+        const deptCounts = {};
+        const trackCounts = {};
+        data.forEach(m => {
+          if (m.course) deptCounts[m.course] = (deptCounts[m.course] || 0) + 1;
+          if (m.interest) trackCounts[m.interest] = (trackCounts[m.interest] || 0) + 1;
+        });
+
+        const topD = Object.entries(deptCounts).sort((a,b) => b[1] - a[1])[0];
+        const topT = Object.entries(trackCounts).sort((a,b) => b[1] - a[1])[0];
+
+        kpiDept.textContent = topD ? topD[0].replace('BSc. ', '') : '—';
+        kpiTrack.textContent = topT ? topT[0].split(' ')[0] : '—';
+      }
+
+      function renderTable(data) {
+        tableBody.innerHTML = '';
+        if (data.length === 0) {
+          tableBody.innerHTML = `
+            <tr>
+              <td colspan="8" style="text-align:center; padding: 48px; color:var(--color-text-muted);">
+                <i class="fa-regular fa-folder-open" style="font-size:2rem; margin-bottom:10px; display:block;"></i>
+                No member records match your query.
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        data.forEach(m => {
+          const initials = (m.fullname || 'M').split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase();
+          const tr = document.createElement('tr');
+          const joinDate = m.created_at ? new Date(m.created_at).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) : 'Recently';
+
+          tr.innerHTML = `
+            <td>
+              <div style="display:flex; align-items:center; gap:12px;">
+                <div class="member-avatar">${escapeHtml(initials)}</div>
+                <div>
+                  <strong style="color:var(--color-text-main); font-size:0.95rem;">${escapeHtml(m.fullname)}</strong>
+                  ${m.isRecent ? '<span class="badge-pill new" style="margin-left:6px;"><i class="fa-solid fa-sparkles"></i> NEW</span>' : ''}
+                </div>
+              </div>
+            </td>
+            <td>
+              <code style="font-family:var(--font-mono); color:var(--color-primary); font-weight:700;">${escapeHtml(m.id)}</code>
+            </td>
+            <td>
+              <div><a href="mailto:${escapeHtml(m.email)}" style="color:var(--color-primary); font-size:0.88rem;"><i class="fa-regular fa-envelope"></i> ${escapeHtml(m.email)}</a></div>
+              <div style="font-size:0.82rem; color:var(--color-text-muted); margin-top:2px;"><i class="fa-solid fa-phone"></i> ${escapeHtml(m.phone)}</div>
+            </td>
+            <td>${escapeHtml(m.course)}</td>
+            <td><span style="font-size:0.85rem; color:var(--color-text-muted);">${escapeHtml(m.year_of_study)}</span></td>
+            <td><span class="badge-pill track">${escapeHtml(m.interest)}</span></td>
+            <td style="color:var(--color-text-muted); font-size:0.85rem;">${escapeHtml(joinDate)}</td>
+            <td>
+              <span style="display:inline-flex; align-items:center; gap:6px; font-weight:600; color:#15803D; font-size:0.82rem;">
+                <span style="width:7px; height:7px; border-radius:50%; background:#22C55E;"></span>
+                Active Member
+              </span>
+            </td>
+          `;
+          tableBody.appendChild(tr);
+        });
+      }
+
+      function filterAndRender() {
+        const query = searchInput.value.trim().toLowerCase();
+        const course = courseFilter.value;
+        const track = trackFilter.value;
+
+        const filtered = allMembers.filter(m => {
+          const matchesQuery = !query || 
+            (m.fullname && m.fullname.toLowerCase().includes(query)) ||
+            (m.email && m.email.toLowerCase().includes(query)) ||
+            (m.id && m.id.toLowerCase().includes(query));
+
+          const matchesCourse = course === 'all' || (m.course && m.course.includes(course));
+          const matchesTrack = track === 'all' || (m.interest && m.interest.includes(track));
+
+          return matchesQuery && matchesCourse && matchesTrack;
+        });
+
+        renderTable(filtered);
+      }
+
+      // Export CSV (Read-only export)
+      if (exportBtn) {
+        exportBtn.addEventListener('click', () => {
+          if (allMembers.length === 0) return;
+          const headers = ['Reference ID', 'Full Name', 'Email', 'Phone', 'Department', 'Year', 'Track', 'Date Joined'];
+          const rows = allMembers.map(m => [
+            `"${m.id}"`,
+            `"${m.fullname}"`,
+            `"${m.email}"`,
+            `"${m.phone}"`,
+            `"${m.course}"`,
+            `"${m.year_of_study}"`,
+            `"${m.interest}"`,
+            `"${m.created_at}"`
+          ]);
+
+          const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+          const encodedUri = encodeURI(csvContent);
+          const link = document.createElement('a');
+          link.setAttribute('href', encodedUri);
+          link.setAttribute('download', 'innovate_club_members_roster.csv');
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        });
+      }
+
+      searchInput.addEventListener('input', filterAndRender);
+      courseFilter.addEventListener('change', filterAndRender);
+      trackFilter.addEventListener('change', filterAndRender);
+
+      function escapeHtml(str) {
+        if (!str) return '';
+        return String(str).replace(/[&<>'"]/g, tag => ({
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          "'": '&#39;',
+          '"': '&quot;'
+        }[tag] || tag));
+      }
+    }
+  </script>
+</body>
+</html>

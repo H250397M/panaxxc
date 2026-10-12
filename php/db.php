@@ -44,19 +44,30 @@ function getDatabaseConnection() {
             $pdo = new PDO('sqlite:' . $sqlitePath);
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            // Ensure SQLite table exists
+            // Ensure SQLite table exists with UNIQUE constraint on email
             $pdo->exec("CREATE TABLE IF NOT EXISTS club_members (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 fullname TEXT NOT NULL,
-                email TEXT NOT NULL,
+                email TEXT NOT NULL UNIQUE,
                 phone TEXT NOT NULL,
                 course TEXT NOT NULL,
                 year_of_study TEXT,
                 interest TEXT,
                 message TEXT,
                 status TEXT DEFAULT 'pending',
+                ip_address TEXT,
                 created_at DATETIME DEFAULT CURRENT_TIMESTAMP
             )");
+
+            // Populate sample data if SQLite table is empty
+            $countStmt = $pdo->query("SELECT COUNT(*) FROM club_members");
+            if ($countStmt && $countStmt->fetchColumn() == 0) {
+                $pdo->exec("INSERT INTO club_members (fullname, email, phone, course, year_of_study, interest, message, status) VALUES
+                    ('Alex Kiprono', 'alex.kip@strathmore.edu', '+254 712 345 678', 'Computer Science', 'Year 2', 'Web Development (HTML/CSS/JS/Fullstack)', 'Looking to collaborate on open-source web applications and participate in the upcoming campus hackathon.', 'approved'),
+                    ('Faith Muthoni', 'faith.m@uonbi.ac.ke', '+254 723 456 789', 'Software Engineering', 'Year 3', 'AI & Machine Learning', 'Excited about the sustainable AI hackathon and wanting to contribute as an IoT designer.', 'approved'),
+                    ('Brian Ochieng', 'brian.och@jkuat.ac.ke', '+254 734 567 890', 'Information Technology', 'Year 1', 'Cybersecurity & Cloud', 'First year IT student eager to learn from senior students and attend coding bootcamps.', 'pending')
+                ");
+            }
 
             return $pdo;
         } catch (Exception $sqliteEx) {

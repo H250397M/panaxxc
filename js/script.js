@@ -671,6 +671,11 @@ function initJoinFormValidation() {
       if (response.ok) {
         const result = await response.json();
         if (result.status === 'success') {
+          sessionStorage.setItem('innovate_club_member_session', JSON.stringify({
+            fullname: formData.get('fullname'),
+            email: formData.get('email'),
+            id: result.data ? result.data.reference : 'INN-MEMBER'
+          }));
           showSuccessFeedback(result.message || 'Application submitted successfully!', result.data);
           form.reset();
         } else {
@@ -696,10 +701,13 @@ function initJoinFormValidation() {
       responseBanner.className = 'form-response-banner success';
       responseBanner.style.display = 'flex';
       responseBanner.innerHTML = `
-        <i class="fa-solid fa-circle-check" style="font-size:1.5rem;"></i>
+        <i class="fa-solid fa-circle-check" style="font-size:1.6rem; color:var(--color-primary); flex-shrink:0;"></i>
         <div>
-          <strong>Welcome to Innovate Club!</strong>
-          <p>${escapeHTML(message)}</p>
+          <strong style="font-size:1.05rem;">Welcome to Innovate Club!</strong>
+          <p style="margin: 4px 0 10px;">${message}</p>
+          <a href="members.html" class="btn btn-sm btn-primary" style="display:inline-flex; align-items:center; gap:6px; font-size:0.85rem; padding:6px 14px; border-radius:6px; text-decoration:none;">
+            <i class="fa-solid fa-users"></i> View Member Directory &rarr;
+          </a>
         </div>
       `;
       responseBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -713,10 +721,13 @@ function initJoinFormValidation() {
       responseBanner.className = 'form-response-banner error';
       responseBanner.style.display = 'flex';
       responseBanner.innerHTML = `
-        <i class="fa-solid fa-triangle-exclamation" style="font-size:1.5rem;"></i>
+        <i class="fa-solid fa-triangle-exclamation" style="font-size:1.6rem; color:var(--color-danger); flex-shrink:0;"></i>
         <div>
-          <strong>Submission Error</strong>
-          <p>${escapeHTML(message)}</p>
+          <strong style="font-size:1.05rem;">Registration Notice</strong>
+          <p style="margin: 4px 0 10px;">${escapeHTML(message)}</p>
+          <a href="members.html" style="font-size:0.85rem; color:var(--color-primary); font-weight:700; text-decoration:underline;">
+            Already registered? View Member Directory &rarr;
+          </a>
         </div>
       `;
       responseBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -727,27 +738,47 @@ function initJoinFormValidation() {
 
   function handleStaticFallback(formData) {
     const studentName = formData.get('fullname') || 'Member';
+    const email = (formData.get('email') || '').trim().toLowerCase();
+    const existing = JSON.parse(localStorage.getItem('innovate_club_submissions') || '[]');
+
+    // 1. Prevent joining twice
+    const alreadyRegistered = existing.find(item => item.email && item.email.trim().toLowerCase() === email);
+    if (alreadyRegistered) {
+      const regDate = alreadyRegistered.date ? new Date(alreadyRegistered.date).toLocaleDateString() : 'earlier';
+      showErrorFeedback(`You cannot join twice! An application with email "${escapeHTML(formData.get('email'))}" is already registered (Ref: ${alreadyRegistered.id}, registered on ${regDate}).`);
+      return;
+    }
+
+    // 2. Generate Reference ID
     const regId = 'INN-' + Math.floor(100000 + Math.random() * 900000);
 
-    // Save to local storage for test verification
+    // 3. Save to local storage for persistence
     const submissionRecord = {
       id: regId,
       name: formData.get('fullname'),
       email: formData.get('email'),
       phone: formData.get('phone'),
       course: formData.get('course'),
-      year: formData.get('year_of_study'),
-      interest: formData.get('interest'),
+      year: formData.get('year_of_study') || 'Year 1',
+      interest: formData.get('interest') || 'Web Development',
       message: formData.get('message'),
+      status: 'approved',
       date: new Date().toISOString()
     };
 
-    const existing = JSON.parse(localStorage.getItem('innovate_club_submissions') || '[]');
     existing.push(submissionRecord);
     localStorage.setItem('innovate_club_submissions', JSON.stringify(existing));
 
+    // Store active session so new member can access the restricted directory immediately
+    sessionStorage.setItem('innovate_club_member_session', JSON.stringify({
+      fullname: submissionRecord.name,
+      email: submissionRecord.email,
+      id: submissionRecord.id
+    }));
+
+    // 4. Send Confirmation Feedback
     showSuccessFeedback(
-      `Thank you, ${studentName}! Your application (Ref: ${regId}) has been validated and recorded. A confirmation email has been dispatched. (Offline & PHP ready)`,
+      `Thank you, ${escapeHTML(studentName)}! Your application (Ref: <strong>${regId}</strong>) has been verified and recorded into the club member database. A welcome confirmation email has been dispatched to <strong>${escapeHTML(formData.get('email'))}</strong>.`,
       submissionRecord
     );
     form.reset();

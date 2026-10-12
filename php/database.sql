@@ -21,7 +21,7 @@ CREATE TABLE `club_members` (
   `ip_address` VARCHAR(45) DEFAULT NULL,
   `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  INDEX `idx_email` (`email`),
+  UNIQUE KEY `idx_unique_email` (`email`),
   INDEX `idx_course` (`course`),
   INDEX `idx_status` (`status`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
